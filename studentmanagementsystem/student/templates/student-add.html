@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+
+
+
+{%for m in messages%}
+{%if m.level == DEFAULT_MESSAGE_LEVELS.ERROR%}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>{{m}}</strong> You should check in on some of those fields below.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {%else%}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{m}}</strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {%endif%}
+{%endfor%}
+
+
+<h3 class="text-center m-4">Add Student</h3>
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div class="card bg-light mb-3" >
+            <div class="card-header">
+                <i class="fa-solid fa-address-card fa-lg"></i>Student Registration
+            </div>
+            <div class="card-body">
+              
+              <form action="{% url 'student-add'%}" method="post">
+                {%csrf_token%}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-primary">Add</button>
+                <a href="{%url 'index'%}" class="btn btn-secondary">Cancel</a>
+              </form>
+            </div>
+          </div>
+    </div>
+</div>
+
+{%endblock%}
